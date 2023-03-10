@@ -7,6 +7,10 @@ public class App {
         var p1 = new Person(3, "Ze GAto");
         var p2 = new Person(4, "Rosa");
         // ???? como chamar o count() em Java ???
-        // System.out.println(Person.count());
+        // <=>
+        // Person$Companion comp = Person.Companion;
+        // System.out.println(comp.count());
+        // <=>
+        System.out.println(Person.Companion.count());
     }
 }
