@@ -19,9 +19,11 @@ import static java.lang.System.lineSeparator;
 import static java.util.Collections.list;
 
 public class App {
+    static final String javaPoetPath = "https://repo1.maven.org/maven2/com/squareup/javapoet/1.13.0/javapoet-1.13.0.jar";
 
     public static void main(String[] args) throws IOException {
-        listClassesInClasspath()
+        ClassesFromUrl
+            .listClasses(new URL(javaPoetPath))
             .forEach(c -> printMembers(System.out, c));
     }
 
@@ -70,40 +72,7 @@ public class App {
         }
     }
 
-    public static Stream<Class<?>>listClassesInClasspath() throws IOException {
-        ClassLoader cl = ClassLoader.getSystemClassLoader(); // An AppClassLoader instance
-        return list(cl.getResources("")) // List
-                .stream()
-                .filter(url -> url.getProtocol().equals("file")) // Exclude jar files
-                .map(url -> new File(toURI(url)))
-                .flatMap(f -> f.isDirectory()
-                        ? Arrays.stream(f.listFiles())
-                        : Stream.of(f))
-                .filter(f -> f.getName().contains(".class"))
-                .map(f -> loadClass(cl, qualifiedName(f.getName())));
-    }
-
-
-    private static URI toURI(URL url) {
-        try {
-            return url.toURI();
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    private static Class<?> loadClass(ClassLoader loader, String name) {
-        try {
-            return loader.loadClass(name);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static String qualifiedName(String name) {
-        return name
-            .replace('/', '.')
-            .substring(0, name.length() - ".class".length());
-    }
+    
     @SuppressWarnings("unchecked")
     public static <T> T[] concat(Class<T> eClazz, T[] a, T[] b) {
 
