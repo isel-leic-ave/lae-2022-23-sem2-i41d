@@ -3,10 +3,18 @@ package pt.isel;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class Logger {
     private final Printer out;
     private final MemberKind kind;
+    private final static Map<Class<?>, List<? extends Getter>> getters = new HashMap<>();
 
     public Logger() {
         this(PrinterConsole.INSTANCE, MemberKind.FIELD);
@@ -20,40 +28,32 @@ public class Logger {
     public void log(Object target) {
         out.print(target.getClass().getSimpleName());
         out.print(": ");
-        try {
-            switch (kind) {
-                case FIELD -> logFields(target);
-                case PROPERTY -> logProperties(target);
-            }
-
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void logFields(Object target) throws IllegalAccessException {
-        for(Field f : target.getClass().getDeclaredFields()) {
-            f.setAccessible(true);
-            out.print(f.getName());
-            out.print((" = "));
-            out.print(f.get(target));
-            out.print(", ");
+        var gs = switch (kind) {
+            case FIELD -> loadFieldGetters(target.getClass());
+            case PROPERTY -> loadPropertyGetters(target.getClass());
+            case METHOD -> throw new UnsupportedOperationException();
+        };
+        for (Getter g: gs) {
+            g.getAndPrint(target);
         }
         out.println("");
     }
 
-    private void logProperties(Object target) throws IllegalAccessException, InvocationTargetException {
-        for(Method m : target.getClass().getDeclaredMethods()) {
-            m.setAccessible(true);
-            if(m.getParameterCount() == 0
-                && m.getReturnType() != void.class
-                && m.getName().startsWith("get")) {
-                out.print(m.getName().substring(3));
-                out.print((" = "));
-                out.print(m.invoke(target));
-                out.print(", ");
-            }
-        }
-        out.println("");
+    private List<? extends Getter> loadFieldGetters(Class<?> targetClazz) {
+        return getters.computeIfAbsent(targetClazz, (k) -> Arrays.stream(targetClazz
+                .getDeclaredFields())
+                .filter(f -> !f.isAnnotationPresent(NonLog.class))
+                .map(f -> new GetterField(out, f))
+                .collect(toList()));
+    }
+    private List<? extends Getter> loadPropertyGetters(Class<?> targetClazz) {
+        return getters.computeIfAbsent(targetClazz, (k) -> Arrays.stream(targetClazz
+                .getDeclaredMethods())
+                .filter(m -> m.getParameterCount() == 0
+                        && m.getReturnType() != void.class
+                        && m.getName().startsWith("get")
+                        && !m.isAnnotationPresent(NonLog.class))
+                .map(m -> new GetterProperty(out, m))
+                .collect(toList()));
     }
 }

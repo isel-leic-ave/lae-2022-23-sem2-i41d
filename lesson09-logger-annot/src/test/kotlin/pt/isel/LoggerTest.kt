@@ -23,7 +23,7 @@ class LoggerTest {
         val p = Point(4,7)
         logger.log(p)
         assertEquals(
-            "Point: Module = 8.06225774829855, X = 4, Y = 7, " + System.lineSeparator(),
+            "Point: MODULE = 8.06225774829855, " + System.lineSeparator(),
             out.buffer())
     }
 }
