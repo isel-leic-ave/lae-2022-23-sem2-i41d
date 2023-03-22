@@ -4,4 +4,5 @@
 
 rootProject.name = "lae-2023-i41d"
 // include("lesson08-logger")
-include("lesson09-logger-annot")
+// include("lesson09-logger-annot")
+include("lesson10-logger-annot-formatter")
