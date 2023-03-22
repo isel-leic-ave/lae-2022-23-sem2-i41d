@@ -4,12 +4,13 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class GetterProperty implements Getter {
+public class GetterProperty extends AbstractGetter {
     private final Printer out;
     private final Method m;
     private final String name;
 
     public GetterProperty(Printer out, Method m) {
+        super(out, m);
         this.out = out;
         this.m = m;
         AltName altName = m.getAnnotation(AltName.class);
@@ -24,7 +25,7 @@ public class GetterProperty implements Getter {
         try {
             out.print(name);
             out.print((" = "));
-            out.print(m.invoke(target));
+            format(m.invoke(target));
             out.print(", ");
         } catch (IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);

@@ -3,6 +3,7 @@
  */
 package pt.isel
 
+import java.time.LocalDate
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -25,5 +26,15 @@ class LoggerTest {
         assertEquals(
             "Point: MODULE = 8.06225774829855, " + System.lineSeparator(),
             out.buffer())
+    }
+    @Test fun `test logging fields of Person with formatter for address and birth`() {
+        val out = PrintBuffer()
+        val logger = Logger(out, MemberKind.FIELD)
+        val p = Person(1234124, "Maria Papoila", "Rua Rosa", LocalDate.of(1997, 3, 23))
+        logger.log(p)
+        assertEquals(
+            "Person: id = 1234124, name = Maria Papoila, address = RUA ROSA, birth = 1997-W12-7, " + System.lineSeparator(),
+            out.buffer())
+
     }
 }

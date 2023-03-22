@@ -1,18 +1,23 @@
 package pt.isel;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 
-public class GetterField implements Getter {
+public class GetterField extends AbstractGetter {
     private final Printer out;
     private final Field f;
     private final String name;
 
     public GetterField(Printer out, Field f) {
+        super(out, f);
         this.out = out;
         this.f = f;
+        f.setAccessible(true);
+        /*
+         * Looking for AltName annotation
+         */
         AltName altName = f.getAnnotation(AltName.class);
         this.name = altName != null ? altName.name() : f.getName();
-        f.setAccessible(true);
     }
 
     @Override
@@ -20,10 +25,11 @@ public class GetterField implements Getter {
         try {
             out.print(name);
             out.print((" = "));
-            out.print(f.get(target));
+            format(f.get(target));
             out.print(", ");
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
+
 }
