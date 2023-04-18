@@ -66,21 +66,27 @@ public class App {
         /*
          * Field nr
          */
-        FieldMaker nrMaker = classMaker.addField(int.class, "nr").private_().final_();
+        FieldMaker nrMaker = classMaker
+                .addField(int.class, "nr")
+                .private_()
+                .final_();
         /**
          * Constructor
          */
         MethodMaker ctorMaker = classMaker
                 .addConstructor(int.class)
                 .public_();
-        ctorMaker.invokeSuperConstructor();
+        ctorMaker
+                .invokeSuperConstructor();
         ctorMaker
                 .field(nrMaker.name())
                 .set(ctorMaker.param(0));
         /**
          * Method mul
          */
-        MethodMaker mulMaker = classMaker.addMethod(int.class, "mul", int.class).public_();
+        MethodMaker mulMaker = classMaker
+                .addMethod(int.class, "mul", int.class)
+                .public_();
         Variable res = mulMaker
                 .param(0)
                 .mul(mulMaker.field(nrMaker.name()));
