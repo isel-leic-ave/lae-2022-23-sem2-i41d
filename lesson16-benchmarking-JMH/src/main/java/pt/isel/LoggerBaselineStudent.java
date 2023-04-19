@@ -1,19 +1,29 @@
 package pt.isel;
 
-public class LoggerBaselineStudent {
+public class LoggerBaselineStudent extends AbstractLogger {
 
-    private final Printer printer;
-
-    public LoggerBaselineStudent(Printer printer) {
-        this.printer = printer;
+    protected LoggerBaselineStudent(Printer out) {
+        super(out);
     }
 
     public void log(Object target) {
         Student s = (Student) target;
-        printer.print("Student: nr = ");
-        printer.print(s.getNr());
-        printer.print(", name = ");
-        printer.print(s.getName());
-        printer.print(", \n");
+        out.print("Student: ");
+        /**
+         * Prop nr
+         */
+        out.print("nr = ");
+        out.print(s.getNr());
+        out.print(", ");
+        /**
+         * Prop name
+         */
+        out.print("name = ");
+        out.print(s.getName());
+        out.print(", ");
+        /**
+         * End
+         */
+        out.println("");
     }
 }
