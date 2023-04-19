@@ -1,15 +1,52 @@
 import org.cojen.maker.ClassMaker;
 import org.cojen.maker.MethodMaker;
 import org.cojen.maker.Variable;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.util.TraceClassVisitor;
 import pt.isel.AbstractLogger;
+import pt.isel.MemberKind;
 import pt.isel.Printer;
+import pt.isel.PrinterConsole;
 
-import java.util.Arrays;
-import java.util.Locale;
+import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
 
 import static java.util.Arrays.stream;
 
 public class LoggerDynamic {
+    public static AbstractLogger logger(Class<?> domain) {
+        return logger(domain, MemberKind.PROPERTY, PrinterConsole.INSTANCE);
+
+    }
+    public static AbstractLogger logger(Class<?> domain, MemberKind kind, Printer out) {
+        return switch (kind){
+            case FIELD, METHOD -> throw new UnsupportedOperationException();
+            case PROPERTY -> buildLoggerPropertiesAndInstantiate(domain, out);
+        };
+    }
+
+    public static AbstractLogger buildLoggerPropertiesAndInstantiate(Class<?> domain, Printer out) {
+        try {
+            return (AbstractLogger) buildLoggerDynamicForProperties(domain)
+                    .finish()
+                    .getDeclaredConstructor(Printer.class)
+                    .newInstance(out);
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void buildLoggerPropertyAndPrintBytecodes(Class<?> domain) {
+        final byte[] bytes = buildLoggerDynamicForProperties(domain).finishBytes();
+        printBytecodes(bytes);
+    }
+
+    public static void printBytecodes(byte[] bytes) {
+        final var reader = new ClassReader(bytes);
+        final var tcv = new TraceClassVisitor(new PrintWriter(System.out));
+        reader.accept(tcv, 0);
+    }
+
 
     /**
      * Build somthing equivalent to
