@@ -1,14 +1,11 @@
 import org.cojen.maker.ClassMaker;
 import org.cojen.maker.MethodMaker;
 import org.cojen.maker.Variable;
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.util.TraceClassVisitor;
 import pt.isel.AbstractLogger;
 import pt.isel.MemberKind;
 import pt.isel.Printer;
 import pt.isel.PrinterConsole;
 
-import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 
 import static java.util.Arrays.stream;
@@ -35,18 +32,6 @@ public class LoggerDynamic {
             throw new RuntimeException(e);
         }
     }
-
-    public static void buildLoggerPropertyAndPrintBytecodes(Class<?> domain) {
-        final byte[] bytes = buildLoggerDynamicForProperties(domain).finishBytes();
-        printBytecodes(bytes);
-    }
-
-    public static void printBytecodes(byte[] bytes) {
-        final var reader = new ClassReader(bytes);
-        final var tcv = new TraceClassVisitor(new PrintWriter(System.out));
-        reader.accept(tcv, 0);
-    }
-
 
     /**
      * Build somthing equivalent to

@@ -1,11 +1,23 @@
 package pt.isel
 
+import LoggerDynamic
 import org.junit.jupiter.api.Test
-import kotlin.test.assertEquals
+import org.objectweb.asm.ClassReader
+import org.objectweb.asm.util.TraceClassVisitor
+import java.io.PrintWriter
 
-public class LoggerDynamicBytecodeTest {
+class LoggerDynamicBytecodeTest {
+
     @Test
     fun `test logging properties of Student`() {
-        LoggerDynamic.buildLoggerPropertyAndPrintBytecodes(Student::class.java)
+        val bytes = LoggerDynamic.buildLoggerDynamicForProperties(Student::class.java).finishBytes()
+        printBytecodes(bytes)
+
+    }
+
+    fun printBytecodes(bytes: ByteArray?) {
+        val reader = ClassReader(bytes)
+        val tcv = TraceClassVisitor(PrintWriter(System.out))
+        reader.accept(tcv, 0)
     }
 }
