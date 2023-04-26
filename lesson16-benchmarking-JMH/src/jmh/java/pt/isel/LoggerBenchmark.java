@@ -4,6 +4,7 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -17,30 +18,28 @@ import java.util.concurrent.TimeUnit;
 public class LoggerBenchmark {
 
     Printer emptyPrinter;
-    Logger loggerReflect;
-    LoggerBaselineStudent baseline;
+    AbstractLogger logger;
+    Student s = new Student(3414, "Ze Manel");
 
-    static final Student s = new Student(3414, "Ze Manel");
+    @Param({"baseline", "reflect", "dynamic"}) String approach;
 
     @Setup
     public void setup(Blackhole bh) {
-        emptyPrinter = new Printer() {
-            public void print(Object msg) {
-                // Do nothing
-                bh.consume(msg);
-            }
+        emptyPrinter = new EmptyPrinter(bh);
+        logger = switch(approach) {
+            case "reflect" -> new Logger(emptyPrinter, MemberKind.FIELD);
+            case "baseline" -> new LoggerBaselineStudent(emptyPrinter);
+            case "dynamic" -> LoggerDynamic.logger(
+                    Student.class,
+                    MemberKind.PROPERTY,
+                    emptyPrinter);
+            default -> throw new UnsupportedOperationException();
         };
-        loggerReflect = new Logger(emptyPrinter, MemberKind.FIELD);
-        baseline = new LoggerBaselineStudent(emptyPrinter);
     }
 
     @Benchmark
-    public void benchLoggerReflect() {
-        loggerReflect.log(s);
+    public void logger() {
+        logger.log(s);
     }
 
-    @Benchmark
-    public void benchLoggerBaseline() {
-        baseline.log(s);
-    }
 }

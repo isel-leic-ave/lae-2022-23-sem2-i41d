@@ -1,44 +1,46 @@
 package pt.isel;
 
-public class PrinterConsole implements Printer {
+import org.openjdk.jmh.infra.Blackhole;
 
-    public static final PrinterConsole INSTANCE = new PrinterConsole();
+class EmptyPrinter implements Printer {
+    private final Blackhole bh;
 
-    private PrinterConsole() {
+    public EmptyPrinter(Blackhole bh) {
+        this.bh = bh;
     }
 
-    @Override
     public void print(Object msg) {
-        System.out.print(msg);
+        // Do nothing
+        bh.consume(msg);
     }
 
     @Override
     public void print(byte msg) {
-        System.out.print(msg);
+        bh.consume(msg);
     }
 
     @Override
     public void print(short msg) {
-        System.out.print(msg);
+        bh.consume(msg);
     }
 
     @Override
     public void print(int msg) {
-        System.out.print(msg);
+        bh.consume(msg);
     }
 
     @Override
     public void print(long msg) {
-        System.out.print(msg);
+        bh.consume(msg);
     }
 
     @Override
     public void print(float msg) {
-        System.out.print(msg);
+        bh.consume(msg);
     }
 
     @Override
     public void print(double msg) {
-        System.out.print(msg);
+        bh.consume(msg);
     }
 }

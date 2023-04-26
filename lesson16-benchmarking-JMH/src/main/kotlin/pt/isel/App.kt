@@ -7,6 +7,30 @@ fun main() {
         override fun print(msg: Any?) {
             // Do nothing
         }
+
+        override fun print(msg: Byte) {
+
+        }
+
+        override fun print(msg: Short) {
+
+        }
+
+        override fun print(msg: Int) {
+
+        }
+
+        override fun print(msg: Long) {
+
+        }
+
+        override fun print(msg: Float) {
+
+        }
+
+        override fun print(msg: Double) {
+
+        }
     }
     val logger = Logger(emptyPrinter, MemberKind.FIELD)
     val baseline = LoggerBaselineStudent(emptyPrinter);

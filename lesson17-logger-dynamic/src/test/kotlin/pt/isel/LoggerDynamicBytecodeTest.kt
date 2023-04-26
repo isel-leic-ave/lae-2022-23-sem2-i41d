@@ -1,6 +1,5 @@
 package pt.isel
 
-import LoggerDynamic
 import org.junit.jupiter.api.Test
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.util.TraceClassVisitor

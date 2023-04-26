@@ -1,3 +1,5 @@
+package pt.isel;
+
 import org.cojen.maker.ClassMaker;
 import org.cojen.maker.MethodMaker;
 import org.cojen.maker.Variable;
@@ -89,7 +91,9 @@ public class LoggerDynamic {
                 .forEach(m -> {
                     final var propName = m.getName().substring(3).toLowerCase();
                     logMaker.field(outFieldName).invoke("print", propName + " = "); // out.print("nr = ");
-                    final var propValueVar =  target.invoke(m.getName()) ;          // var v = s.getNr();
+                    var propValueVar =  target.invoke(m.getName()) ;          // var v = s.getNr();
+                    // if(m.getReturnType().isPrimitive())
+                    //    propValueVar = propValueVar.box();
                     logMaker.field(outFieldName).invoke("print", propValueVar);     // out.print(v);
                     logMaker.field(outFieldName).invoke("print", ", ");             // out.print(", ");
                 });
