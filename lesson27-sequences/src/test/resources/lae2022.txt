@@ -1,0 +1,110 @@
+i41d;43544;Filipe Leonardo Montoito Costa
+i41d;44794;João Neves
+i41d;44829;Délcio Augusto
+i41d;45935;David Paulo Santos Robalo Costa
+i41d;46005;Tiago Miguel Paulino Silva
+i41d;47185;Miguel Agostinho da Silva Rocha
+i41d;47217;Afonso Araújo Machado
+i41d;47249;Miguel Henriques Couto de Almeida
+i41d;48089;André Filipe Pina Páscoa
+i41d;48091;Tiago Nuno Custódio Gomes Duarte
+i41d;48254;José Menezes
+i41d;48260;Miguel Josê Reys e Sousa Marmelete
+i41d;48270;Daniel Lopes Pina
+i41d;48271;Miguel Marques Palma
+i41d;48275;Leandro Gonçalves Duarte
+i41d;48279;André Filipe Ferreira Gomes
+i41d;48280;André Filipe do Pilar de Jesus
+i41d;48287;Nyckollas Brandão
+i41d;48294;Kaiwei Dong
+i41d;48300;Alexandre Alemão Madeira
+i41d;48302;Diogo Alexandre Ferreira de Jesus
+i41d;48307;Fábio Manuel Vigário Pereira
+i41d;48309;André David dos Santos
+i41d;48322;Ricardo de Freitas Henriques
+i41d;48333;Tomás Correia Barroso
+i41d;48348;João Diogo da Anunciação Magalhães
+i41d;48357;Tomás António Oliveira Baptista
+i41d;48358;David Rosa Ferreira
+i41d;48361;Francisco Cortes Castel Branco Trigo Barreiras
+i41d;48362;Tomás Rua de Carvalho
+i41d;48929;Henrique Valente Mareco Ferreira Águas
+i42d;44796;Rui Cunha
+i42d;44860;Inês Franco
+i42d;44867;António José Paraíso Eusébio
+i42d;45373;Pedro Ribeiro
+i42d;45827;Daniel Filipe Henriques Azevedo
+i42d;46017;Vasco Fernandes Lourenço
+i42d;46020;Luís Ferreira
+i42d;46109;João Cravo
+i42d;46536;Rodrigo Fernandes das Neves
+i42d;47147;André Jardim
+i42d;47177;Tiago Alexandre Farinha da Silva
+i42d;47181;João Assunção
+i42d;47186;Joao Silva
+i42d;47198;Ricardo Filipe Matos Rocha
+i42d;47202;Manuel Maria Penha Gonçalves Cavaco Henriques
+i42d;47230;Miguel Assuda Neves
+i42d;47233;Nuno Bartolomeu
+i42d;47254;Miguel Calado Perdigão de Marçal Verdugo
+i42d;47262;Francisco Ludovico
+i42d;47531;Guilherme Pedro Serra Cepeda
+i42d;48090;Rafael dos Santos Martins
+i42d;48256;Tiago Alexandre Monteiro Martinho
+i42d;48259;Vasco António Alves Branco
+i42d;48264;João Pedro Saias Pereira
+i42d;48265;Tiago João Guerreiro Filipe
+i42d;48267;Teodosie Pienescu
+i42d;48269;José Eduardo Esteves Santos Borges
+i42d;48282;Francisco Duarte Rosa da Costa
+i42d;48286;Tomás Matos
+i42d;48306;Raul Louro Correia dos Santos
+i42d;48328;Gonçalo Miguel Carvalho Silva
+i42d;48331;André David da Silva Matos
+i42d;48340;Joaquim Ferreira
+i42d;48347;António Maria Ferreira de Oliveira Carvalho
+i43d;45826;Frederico Ribeiro
+i43d;46023;Jorge Pires
+i43d;46054;Bernardo Camarate
+i43d;46062;David Marques
+i43d;46071;Fernando Paulo Chorão Fragateiro
+i43d;46089;João Pinto
+i43d;46090;Cátia Abreu
+i43d;46108;João Balsinha
+i43d;46147;Tiago Pilaro
+i43d;46537;Gonçalo Manuel Mota Antunes
+i43d;46539;João André Remédios
+i43d;47179;Afonso Cabaço
+i43d;47180;Guilherme Filipe Vasconcelos Guedes Cirilo
+i43d;47184;Mafalda Maria Ferreira Rodrigues
+i43d;47188;Inês Sofia Duarte Martins
+i43d;47196;Joao Carlos Monteiro Rocha
+i43d;47207;Diogo Martins Ribeiro
+i43d;47214;Tiago Rocha
+i43d;47219;Henrique Duarte Ferreira Fonseca
+i43d;47231;David Wong Ramos
+i43d;47255;Gonçalo Silva
+i43d;47266;Sérgio Augusto Bernardino
+i43d;47269;Douglas Alexandre Ribeiro Incáo
+i43d;47280;António Antunes
+i43d;47283;Ricardo Duarte Cardoso Bernardino
+i43d;48320;Diogo António Moreira Lopes de Carvalho Rosa
+i41N;19048;Carla Belo
+i41N;24538;Marta Fernandes
+i41N;25918;Carlos Manuel Torres Teixeira
+i41N;26349;Joaquim Isaías de Oliveira Monteiro
+i41N;26691;Jose Antonio Vieira Matos
+i41N;29621;David Brazuna
+i41N;32398;Helder Mendes Augusto
+i41N;33619;Helder Duarte
+i41N;43316;David Jose Martinho de Abreu
+i41N;43584;Pedro Miranda
+i41N;43590;Inês Nunes
+i41N;43594;Ricardo Rodrigues
+i41N;44591;Edgar Matias
+i41N;45371;Gonçalo André Louro Cesário Costa
+i41N;45831;Gonçalo Henrique Machuqueiro Lourenço
+i41N;46084;Diogo Fernandes
+i41N;46974;Luis António Carvalho Alves
+i41N;48087;Vinicius Silva Cordeiro
+i41N;48928;Hugo Araújo

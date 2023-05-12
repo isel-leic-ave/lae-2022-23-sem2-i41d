@@ -138,7 +138,10 @@ class ExclusiveWriter(path: String) : Closeable{
         .also {  it.channel.lock() }
         .bufferedWriter()
 
-    val cleanable = cleaner.register(this, ExclusiveWriterCleaner(writer))
+    val cleanable = cleaner.register(this) {
+        println("Running cleaner")
+        writer.close() // To auto flush pending buffer
+    }
 
     override fun close() {
         cleanable.clean()
