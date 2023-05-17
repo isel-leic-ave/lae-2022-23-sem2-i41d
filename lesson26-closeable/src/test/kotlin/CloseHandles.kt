@@ -137,14 +137,27 @@ class ExclusiveWriter(path: String) : Closeable{
     private val writer = FileOutputStream(path)
         .also {  it.channel.lock() }
         .bufferedWriter()
+    /**
+     * The cleaning action could be a lambda but all too easily
+     * will capture the object reference (i.e. ExclusiveWriter),
+     * by referring to fields of the object being cleaned,
+     * preventing the object from becoming phantom reachable.
+     */
+    val register = cleaner.register(this, ExclusiveWriterCleaner(writer))
+    init {
+        /*
+        // Capture a reference to outer class ExclusiveWriter
+        // preventing it from being cleaned
+        //
+        cleaner.register(this) {
+            println("Running cleaner")
+            writer.close() // To auto flush pending buffer
+        }
+         */
 
-    val cleanable = cleaner.register(this) {
-        println("Running cleaner")
-        writer.close() // To auto flush pending buffer
     }
-
     override fun close() {
-        cleanable.clean()
+        register.clean()
     }
 
     fun write(s: String) {
@@ -157,5 +170,4 @@ class ExclusiveWriterCleaner(val writer: BufferedWriter) : Runnable {
         println("Running cleaner")
         writer.close() // To auto flush pending buffer
     }
-
 }
