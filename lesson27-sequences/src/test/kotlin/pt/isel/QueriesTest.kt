@@ -40,9 +40,9 @@ fun randGenerator() : Sequence<Int> {
 }
 
 fun foo() = sequence<Int> {
-    yield(7)
-    yield(6)
-    yield(5)
+    yield(3751)
+    yield(9233)
+    yield(7456)
 }
 
 class QueriesTest {
